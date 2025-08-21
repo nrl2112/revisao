@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-// GET all orders with client information
+// GET pegar todos os pedidos com informações do cliente
 router.get('/', async (req, res) => {
   try {
     const orders = await pool.query(
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET all orders by client ID
+// GET pegat todos os pedidos por ID do cliente
 router.get('/client/:clientId', async (req, res) => {
   try {
     const orders = await pool.query(
@@ -30,7 +30,7 @@ router.get('/client/:clientId', async (req, res) => {
   }
 });
 
-// POST create order
+// POST criar um novo pedido
 router.post('/', async (req, res) => {
   const { client_id, order_date, total_amount, status } = req.body;
 
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT update order
+// PUT atualizar um pedido existente
 router.put('/:id', async (req, res) => {
   const { order_date, total_amount, status } = req.body;
   try {
@@ -71,7 +71,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE order
+// DELETE deletar um pedido
 router.delete('/:id', async (req, res) => {
   try {
     const result = await pool.query('DELETE FROM orders WHERE order_id = ?', [req.params.id]);

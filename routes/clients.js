@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-// GET all clients
+// GET visualizar todos os clientes
 router.get('/', async (req, res) => {
   try {
     const clients = await pool.query('SELECT * FROM clients ORDER BY created_at DESC');
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET client by ID
+// GET visualizar cliente pelo ID
 router.get('/:id', async (req, res) => {
   try {
     const client = await pool.query('SELECT * FROM clients WHERE client_id = ?', [req.params.id]);
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST create client
+// POST criar cliente
 router.post('/', async (req, res) => {
   const { name, email, address } = req.body;
   if (!name || !email) {
@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT update client
+// PUT atualizar cliente
 router.put('/:id', async (req, res) => {
   const { name, email, address } = req.body;
   try {
@@ -66,7 +66,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE client
+// DELETE deletar cliente
 router.delete('/:id', async (req, res) => {
   try {
     const result = await pool.query('DELETE FROM clients WHERE client_id = ?', [req.params.id]);
